@@ -115,7 +115,8 @@ export default class HashMap {
         }
         // key not found
         if (!curr)
-            return false
+            return
+
         if (!prev && !curr.next) {
             // if node is sole node in bucket
             this.occupied -= 1
@@ -129,5 +130,74 @@ export default class HashMap {
             // deletion in LL
             prev.next = curr.next
         }
+    }
+
+    length() {
+        let count = 0
+        this.bucketsArray.forEach((bucket) => {
+            let curr = bucket
+            if (bucket) {
+                count++
+                while (curr.next) {
+                    count++
+                    curr = curr.next
+                }
+            }
+        })
+        return count
+    }
+
+    clear() {
+        this.bucketsArray = new Array(16).fill(null)
+        this.occupied = 0
+        this.capacity = this.bucketsArray.length
+    }
+
+    keys() {
+        const arrayOfKeys: string[] = []
+        this.bucketsArray.forEach((bucket) => {
+            let curr = bucket
+            if (bucket) {
+                arrayOfKeys.push(curr.key)
+                while (curr.next) {
+                    curr = curr.next
+                    arrayOfKeys.push(curr.key)
+                }
+                
+            }
+        })
+        return arrayOfKeys
+    }
+
+    values() {
+        const arrayOfValues: string[] = []
+        this.bucketsArray.forEach((bucket) => {
+            let curr = bucket
+            if (bucket) {
+                arrayOfValues.push(curr.values)
+                while (curr.next) {
+                    curr = curr.next
+                    arrayOfValues.push(curr.values)
+                }
+                
+            }
+        })
+        return arrayOfValues
+    }
+
+    entries() {
+        const arrayOfEntries: string[][] = []
+        this.bucketsArray.forEach((bucket) => {
+            let curr = bucket
+            if (bucket) {
+                arrayOfEntries.push([curr.key, curr.values])
+                while (curr.next) {
+                    curr = curr.next
+                    arrayOfEntries.push([curr.key, curr.values])
+                }
+                
+            }
+        })
+        return arrayOfEntries
     }
 }
