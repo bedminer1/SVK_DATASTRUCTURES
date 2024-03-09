@@ -28,6 +28,7 @@
 		<div class="flex gap-4">
 			<a href="/">home</a>
 			<a href="/linked-list">linked-list</a>
+			<a href="/hash-map">hash-map</a>
 		</div>
 		
 	</svelte:fragment>

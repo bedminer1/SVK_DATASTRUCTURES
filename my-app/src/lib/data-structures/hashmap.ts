@@ -101,6 +101,6 @@ export default class HashMap {
         if (!curr)
             return null
         else
-            return curr.key
+            return curr.value
     }
 }
