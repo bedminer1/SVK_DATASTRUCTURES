@@ -33,7 +33,7 @@
 		
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		<a href="https://github.com/bedminer1/TS_DS-ODIN-" target="_blank">github</a>
+		<a href="https://github.com/bedminer1/SVK_DATASTRUCTURES" target="_blank">github@bedminer1</a>
 	</svelte:fragment>
 </AppBar>
 <slot />
