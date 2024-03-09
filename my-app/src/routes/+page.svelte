@@ -2,8 +2,9 @@
 	
 </script>
 
-<div class="h-screen w-full flex flex-col justify-center items-center">
-	<div class="h-80 w-3/5 text-center">
+<div class="h-[80vh] w-full flex flex-col justify-center items-center">
+	<div class="h-80 w-3/5 text-center flex flex-col items-center justify-center">
+		<img class="size-40 m-0" src="wizard2.png" alt="wizard">
 		<h1 class="h1 mb-5">Hello</h1>
 		<p>
 			<mark class="bg-primary-600 text-slate-100">Showcase of data structures</mark> as part of an assignment for 
