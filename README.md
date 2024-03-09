@@ -1,3 +1,3 @@
-# TS_DS-ODIN-
+# SVK_DATASTRUCTURES
 
 data structures assignments as part of theOdinProject 
