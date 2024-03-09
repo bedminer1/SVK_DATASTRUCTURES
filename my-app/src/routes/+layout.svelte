@@ -9,6 +9,7 @@
 	import css from 'highlight.js/lib/languages/css';
 	import javascript from 'highlight.js/lib/languages/javascript';
 	import typescript from 'highlight.js/lib/languages/typescript';
+	import { AppBar } from '@skeletonlabs/skeleton';
 
 	hljs.registerLanguage('xml', xml); // for HTML
 	hljs.registerLanguage('css', css);
@@ -22,4 +23,16 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
+<AppBar>
+	<svelte:fragment slot="lead">
+		<div class="flex gap-4">
+			<a href="/">home</a>
+			<a href="/linked-list">linked-list</a>
+		</div>
+		
+	</svelte:fragment>
+	<svelte:fragment slot="trail">
+		<a href="https://github.com/bedminer1/TS_DS-ODIN-" target="_blank">github</a>
+	</svelte:fragment>
+</AppBar>
 <slot />
