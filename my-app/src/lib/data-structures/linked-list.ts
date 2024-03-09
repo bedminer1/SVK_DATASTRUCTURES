@@ -1,13 +1,6 @@
-export class Node {
-  value: number;
-  next: Node | null;
-  constructor(value: number) {
-    this.value = value || 0;
-    this.next = null;
-  }
-}
+import Node from '$lib/data-structures/LL-node'
 
-export class LinkedList {
+export default class LinkedList {
   listHead: Node | null;
   constructor() {
     this.listHead = null;
@@ -58,7 +51,7 @@ export class LinkedList {
     }
     return dummy;
   }
-  
+
   // at(index) returns the node at the given index
   at(index: number) {
     let dummy = this.listHead;
@@ -68,4 +61,54 @@ export class LinkedList {
     }
     return dummy;
   }
+
+// pop removes the last element from the list
+    pop() {
+        let curr = this.listHead
+        let prev = null
+        while (curr && curr.next) {
+            prev = curr
+            curr = curr.next
+        }
+
+        if (prev) 
+            prev.next = null
+    }  
+    
+// contains(value) returns true if the passed in value is in the list and otherwise returns false.
+    contains(value: number) {
+        let temp = this.listHead
+        while (temp) {
+            if (temp.value === value) return true
+            temp = temp.next
+        }
+        return false
+    }
+
+// find(value) returns the index of the node containing value, or null if not found.
+    find(value: number) {
+        let count = 0
+        let temp = this.listHead
+        while (temp) {
+            if (temp.value === value) return count
+            count++
+            temp = temp.next
+        }
+        return null
+    }
+
+// toString represents your LinkedList objects as strings, so you can print them out and preview them in the console.
+    toString() {
+        let temp = this.listHead
+        let listArr = []
+        while (temp) {
+            listArr.push(temp.value)
+            temp = temp.next
+        }
+        if (listArr[0])
+            listArr[0] = '(' + listArr[0]
+        if (listArr[listArr.length - 1]) 
+            listArr[listArr.length - 1] = listArr[listArr.length - 1] + ') -> null'
+        return (listArr.join(') -> ('))
+    }
 }
