@@ -98,20 +98,21 @@ export default class HashMap {
 
   remove(key: string) {
     const bucket = this.hash(key);
-    let curr = this.bucketsArray[bucket];
-    let prev = null;
+    let curr: HashNode | null = this.bucketsArray[bucket];
+    let prev: HashNode | null = null;
 
     while (curr && curr.key !== key) {
       prev = curr;
       curr = curr.next;
     }
+
     // key not found
     if (!curr) return;
 
     if (!prev && !curr.next) {
       // if node is sole node in bucket
       this.occupied -= 1;
-      this.bucketsArray[bucket] = null;
+      this.bucketsArray[bucket] = curr.next;
     } else if (!prev) {
       // if node is listHead
       this.bucketsArray[bucket] = curr.next;

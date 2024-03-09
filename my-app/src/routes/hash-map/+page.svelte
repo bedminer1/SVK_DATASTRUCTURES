@@ -3,13 +3,20 @@
 
     // example code to test
     const hashMap = new HashMap()
-    let entries: string
+    let entries: string = '[*key-value pairs here*]'
 
     function handleAdd(e: any) {
         const formData = new FormData(e.target)
         const key = formData.get('key') as string
         const value = formData.get('value') as string
         hashMap.add(key, value)
+        entries = JSON.stringify(hashMap.entries())
+    }
+
+    function handleRemove(e:any) {
+        const formData = new FormData(e.target)
+        const key = formData.get('key') as string
+        hashMap.remove(key)
         entries = JSON.stringify(hashMap.entries())
     }
 
@@ -20,9 +27,16 @@
     <h1 class="h1 text-center">
         {entries}
     </h1>
-    <form on:submit={handleAdd} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
-        <input type="text" class="input px-3 rounded-sm" id="key" required name="key" placeholder="key">
-        <input type="text" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
+    <div class="flex gap-3">
+        <form on:submit={handleAdd} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
+            <input type="text" class="input px-3 rounded-sm" id="key" required name="key" placeholder="key">
+            <input type="text" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
         <button type="submit" class="rounded-md w-20 variant-filled h-8">add</button>
-    </form>
+        </form>
+        <form on:submit={handleRemove} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
+            <input type="text" class="input px-3 rounded-sm" id="key" required name="key" placeholder="key">
+            <button type="submit" class="rounded-md w-20 variant-filled h-8">delete</button>
+        </form>
+    </div>
+    
 </div>

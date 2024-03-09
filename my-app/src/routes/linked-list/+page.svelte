@@ -3,8 +3,7 @@
 
     // example code to test
     const linkedList = new LinkedList()
-    linkedList.append(100)
-    let displayLinkedList = linkedList.toString()
+    let displayLinkedList = '*linked-list here* -> null'
 
     // handle appending
     function handleAppend(e: any) {
@@ -29,13 +28,16 @@
     <h1 class="h1 text-center">
         {displayLinkedList}
     </h1>
-    <form on:submit={handleAppend} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
-        <input type="numeric" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
-        <input type="numeric" class="input px-3 rounded-sm" id="index" required name="index" placeholder="index">
+    <div class="flex gap-3">
+        <form on:submit={handleAppend} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
+            <input type="numeric" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
+            <input type="numeric" class="input px-3 rounded-sm" id="index" required name="index" placeholder="index">
         <button type="submit" class="rounded-md w-20 variant-filled h-8">insert</button>
-    </form>
-    <form on:submit={handleDelete} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
-        <input type="numeric" class="input px-3 rounded-sm" id="index" required name="index" placeholder="index">
-        <button type="submit" class="rounded-md w-20 variant-filled h-8">delete</button>
-    </form>
+        </form>
+        <form on:submit={handleDelete} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
+            <input type="numeric" class="input px-3 rounded-sm" id="index" required name="index" placeholder="index">
+            <button type="submit" class="rounded-md w-20 variant-filled h-8">delete</button>
+        </form>
+    </div>
+    
 </div>
