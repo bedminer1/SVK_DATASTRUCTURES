@@ -1,6 +1,6 @@
 class HashNode {
     key: string
-    value: any
+    value: string | null
     next: HashNode | null
 
     constructor(key: string, value = null, next = null) {
@@ -93,14 +93,41 @@ export default class HashMap {
         }
     }
 
-    get(key: string) {
+    get(key: string): string {
         const bucket = this.hash(key)
         let curr = this.bucketsArray[bucket]
         while (curr && curr.key !== key) 
             curr = curr.next
         if (!curr)
-            return null
+            return 'Key not in HashMap :('
         else
             return curr.value
+    }
+
+    remove(key: string) {
+        const bucket = this.hash(key)
+        let curr = this.bucketsArray[bucket]
+        let prev = null
+
+        while (curr && curr.key !== key) {
+            prev = curr
+            curr = curr.next
+        }
+        // key not found
+        if (!curr)
+            return false
+        if (!prev && !curr.next) {
+            // if node is sole node in bucket
+            this.occupied -= 1
+            this.bucketsArray[bucket] = null
+        } 
+        else if (!prev) {
+            // if node is listHead
+            this.bucketsArray[bucket] = curr.next
+        } 
+        else {
+            // deletion in LL
+            prev.next = curr.next
+        }
     }
 }

@@ -3,7 +3,5 @@
 
     const hashMap = new HashMap()
     hashMap.add('hi', 'mom')
-    hashMap.add('hello', 'world')
 
-    console.log(hashMap.get('hi'))
 </script>
