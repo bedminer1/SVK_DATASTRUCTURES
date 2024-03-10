@@ -78,4 +78,26 @@ export default class BST {
         }
         return node
     }
+
+    // bfs
+    levelOrder(callback: Function) { 
+        if (!this.root) return []
+        const queue = [this.root]
+        const results = []
+        while (queue.length) {
+            let level = []
+            let size = queue.length
+            for (let i = 0; i < size; i++) {
+                const node = queue.shift() 
+                if (!node) continue
+                level.push(node.value)
+                if (node.left) queue.push(node.left)
+                if (node.right) queue.push(node.right)
+                if (callback) callback(node)
+            }
+            results.push(level)
+        } 
+        if (!callback) 
+            return results
+    }
 }
