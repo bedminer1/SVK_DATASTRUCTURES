@@ -40,4 +40,30 @@ export default class BST {
         }
         return root
     }
+
+    #minValue(root: TreeNode) {
+        let minv: number = root.value 
+        while (root.left) {
+            minv = root.left.value
+            root = root.left
+        } 
+        return minv
+    }
+
+    delete(value: number, root = this.root) {
+        if (!root) return root
+        if (root.value < value) 
+            root.right = this.delete(value, root.right)
+        else if (root.value > value) 
+            root.left = this.delete(value, root.left)
+        else {
+            if (!root.left)
+                return root.right
+            else if (!root.right)
+                return root.left
+            root.value = this.#minValue(root.right)
+            root.right = this.delete(value, root.right)
+        } 
+        return root
+    }
 }
