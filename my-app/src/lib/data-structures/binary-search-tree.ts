@@ -66,4 +66,16 @@ export default class BST {
         } 
         return root
     }
+
+    find(value: number, root = this.root): TreeNode | null {
+        const node = root
+        if (!node) return null
+        if (node.value !== value) {
+            if (this.find(value, node.right))
+                return this.find(value, node.right)
+            else
+                return this.find(value, node.left)
+        }
+        return node
+    }
 }
