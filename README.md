@@ -13,7 +13,6 @@ Still a WIP though 😅
 
 Stack used:
 
- - PocketBase as a quick backend to store expenses
  - Sveltekit for frontend
  - Tailwind and SkeletonUI for styling
- - and of course, TypeScript
+ - and of course, TypeScript to implement data structuress + scripting frontend
