@@ -6,7 +6,8 @@
 
     function handleAdd(e: any) {
         const formData = new FormData(e.target)
-        const value = formData.get('value') as unknown as number
+        const valueStr: string = formData.get('value') as string
+        const value: number = parseInt(valueStr)
         bst.insert(value, bst.root)
         displayBST = JSON.stringify(bst.levelOrder())
     }

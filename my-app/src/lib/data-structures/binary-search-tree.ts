@@ -38,8 +38,7 @@ export default class BST {
 
   insert(value: number, root = this.root) {
     if (root === null) {
-        // @ts-ignore for some reason value is saved as a string
-      return new TreeNode(parseInt(value));
+      return new TreeNode(value);
     }
     if (root.value < value) {
       root.right = this.insert(value, root.right);
