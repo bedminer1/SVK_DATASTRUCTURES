@@ -10,3 +10,10 @@ This repo aims to explain what are some common data structures and how they coul
 implemented and applied in many use cases. 
 
 Still a WIP though 😅
+
+Stack used:
+
+ - PocketBase as a quick backend to store expenses
+ - Sveltekit for frontend
+ - Tailwind and SkeletonUI for styling
+ - and of course, TypeScript
