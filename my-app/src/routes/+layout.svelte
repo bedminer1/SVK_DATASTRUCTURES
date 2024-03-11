@@ -29,6 +29,7 @@
 			<a href="/">home</a>
 			<a href="/linked-list">linked-list</a>
 			<a href="/hash-map">hash-map</a>
+			<a href="/binary-tree">binary-tree</a>
 		</div>
 		
 	</svelte:fragment>

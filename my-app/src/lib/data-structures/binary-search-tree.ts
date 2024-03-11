@@ -1,103 +1,103 @@
-class TreeNode {
-    value: number
-    left: TreeNode | null
-    right: TreeNode | null
+import { Root } from "postcss";
 
-    constructor(value: number, left?: TreeNode | null, right?: TreeNode | null) {
-        this.value = value
-        this.left = left ?? null
-        this.right = right ?? null
-    }
+class TreeNode {
+  value: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+
+  constructor(value: number, left?: TreeNode | null, right?: TreeNode | null) {
+    this.value = value;
+    this.left = left ?? null;
+    this.right = right ?? null;
+  }
 }
 
 export default class BST {
-    root: TreeNode | null
+  root: TreeNode | null;
 
-    constructor(array: number[]) {
-        this.root = this.buildTree(array)
-    }
+  constructor(array: number[]) {
+    this.root = this.buildTree(array);
+  }
 
-    #sortAndRemoveDupes(array: number[]): number[] {
-        const sorted = [...new Set(array)].sort((a, b) => a - b)
-        return sorted
-    }
+  #sortAndRemoveDupes(array: number[]): number[] {
+    const sorted = [...new Set(array)].sort((a, b) => a - b);
+    return sorted;
+  }
 
-    buildTree(array: number[]): TreeNode | null {
-        let sorted = this.#sortAndRemoveDupes(array)
-        if (sorted.length === 0) return null
-        const mid: number = sorted.length / 2
-        const root: TreeNode | null = new TreeNode(sorted[mid], this.buildTree(sorted.slice(0, mid)), this.buildTree(sorted.slice(mid + 1)))
-        return root
-    }
+  buildTree(array: number[]): TreeNode | null {
+    let sorted = this.#sortAndRemoveDupes(array);
+    if (sorted.length === 0) return null;
+    const mid: number = Math.floor(sorted.length / 2);
+    const root: TreeNode | null = new TreeNode(
+      sorted[mid],
+      this.buildTree(sorted.slice(0, mid)),
+      this.buildTree(sorted.slice(mid + 1))
+    );
+    return root;
+  }
 
-    insert(value: number, root = this.root) {
-        if (root === null) 
-            return new TreeNode(value)
-        if (root.value < value) {
-            root.right = this.insert(value, root.right)
-        } else {
-            root.left = this.insert(value, root.left)
-        }
-        return root
+  insert(value: number, root = this.root) {
+    if (root === null) {
+        // @ts-ignore for some reason value is saved as a string
+      return new TreeNode(parseInt(value));
     }
+    if (root.value < value) {
+      root.right = this.insert(value, root.right);
+    } else {
+      root.left = this.insert(value, root.left);
+    }
+    return root;
+  }
 
-    #minValue(root: TreeNode) {
-        let minv: number = root.value 
-        while (root.left) {
-            minv = root.left.value
-            root = root.left
-        } 
-        return minv
+  #minValue(root: TreeNode) {
+    let minv: number = root.value;
+    while (root.left) {
+      minv = root.left.value;
+      root = root.left;
     }
+    return minv;
+  }
 
-    delete(value: number, root = this.root) {
-        if (!root) return root
-        if (root.value < value) 
-            root.right = this.delete(value, root.right)
-        else if (root.value > value) 
-            root.left = this.delete(value, root.left)
-        else {
-            if (!root.left)
-                return root.right
-            else if (!root.right)
-                return root.left
-            root.value = this.#minValue(root.right)
-            root.right = this.delete(value, root.right)
-        } 
-        return root
+  delete(value: number, root = this.root) {
+    if (!root) return root;
+    if (root.value < value) root.right = this.delete(value, root.right);
+    else if (root.value > value) root.left = this.delete(value, root.left);
+    else {
+      if (!root.left) return root.right;
+      else if (!root.right) return root.left;
+      root.value = this.#minValue(root.right);
+      root.right = this.delete(root.value, root.right);
     }
+    return root;
+  }
 
-    find(value: number, root = this.root): TreeNode | null {
-        const node = root
-        if (!node) return null
-        if (node.value !== value) {
-            if (this.find(value, node.right))
-                return this.find(value, node.right)
-            else
-                return this.find(value, node.left)
-        }
-        return node
+  find(value: number, root = this.root): TreeNode | null {
+    const node = root;
+    if (!node) return null;
+    if (node.value !== value) {
+      if (this.find(value, node.right)) return this.find(value, node.right);
+      else return this.find(value, node.left);
     }
+    return node;
+  }
 
-    // bfs
-    levelOrder(callback: Function) { 
-        if (!this.root) return []
-        const queue = [this.root]
-        const results = []
-        while (queue.length) {
-            let level = []
-            let size = queue.length
-            for (let i = 0; i < size; i++) {
-                const node = queue.shift() 
-                if (!node) continue
-                level.push(node.value)
-                if (node.left) queue.push(node.left)
-                if (node.right) queue.push(node.right)
-                if (callback) callback(node)
-            }
-            results.push(level)
-        } 
-        if (!callback) 
-            return results
+  // bfs
+  levelOrder(callback?: Function) {
+    if (!this.root) return [];
+    const queue = [this.root];
+    const results = [];
+    while (queue.length) {
+      let levelArr = [];
+      let levelSize = queue.length;
+      for (let i = 0; i < levelSize; i++) {
+        const node = queue.shift();
+        levelArr.push(node?.value);
+        if (node?.left) queue.push(node.left);
+        if (node?.right) queue.push(node.right);
+        if (callback) callback(node);
+      }
+      results.push(levelArr);
     }
+    if (!callback) return results;
+  }
 }
