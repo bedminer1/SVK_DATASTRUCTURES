@@ -8,6 +8,15 @@
     // handle appending
     function handleAppend(e: any) {
         const formData = new FormData(e.target)
+        const valueStr: string = formData.get('value') as string
+        const value: number = parseInt(valueStr)
+        linkedList.append(value)
+        displayLinkedList = linkedList.toString()
+    }
+
+    // handle inserting
+    function handleInsert(e: any) {
+        const formData = new FormData(e.target)
         const value = formData.get('value') as unknown as number
         const index = formData.get('index') as unknown as number
         linkedList.insertAt(value, index)
@@ -30,6 +39,10 @@
     </h1>
     <div class="flex gap-3">
         <form on:submit={handleAppend} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
+            <input type="numeric" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
+            <button type="submit" class="rounded-md w-20 variant-filled h-8">append</button>
+        </form>
+        <form on:submit={handleInsert} class="card p-3 rounded-sm flex justify-center gap-4 items-center flex-col">
             <input type="numeric" class="input px-3 rounded-sm" id="value" required name="value" placeholder="value">
             <input type="numeric" class="input px-3 rounded-sm" id="index" required name="index" placeholder="index">
         <button type="submit" class="rounded-md w-20 variant-filled h-8">insert</button>
