@@ -99,4 +99,47 @@ export default class BST {
     }
     if (!callback) return results;
   }
+
+  // root left right
+  preorder(callback: Function) {
+    if (!this.root) return []
+    const stack = [this.root]
+    const results = []
+    while (stack.length) {
+      const node = stack.pop()
+      if (node?.right) stack.push(node?.right)
+      if (node?.left) stack.push(node?.left)
+      if (callback) callback(node)
+      results.push(node?.value)
+    }
+    if (!callback) return results
+  }
+
+  // left right root
+  postorder(callback: Function) {
+    if (!this.root) return []
+    const stack = [this.root]
+    const results = []
+    while (stack.length) {
+      const node = stack.pop()
+      if (node?.left) stack.push(node?.left)
+      if (node?.right) stack.push(node?.right)
+      if (callback) callback(node)
+      results.push(node?.value)
+    }
+    if (!callback) return results.reverse() //since it's executed as a stack
+  }
+
+  // left root right
+  inorder(node:TreeNode | null = this.root, callback: Function, result: number[] = []) {
+    if (!this.root) return []
+    if (!node) return
+    this.inorder(node.left, callback, result)
+    if (callback) callback(node)
+    else result.push(node.value)
+    this.inorder(node.right, callback, result)
+    if (result) return result
+  }
+
+
 }
