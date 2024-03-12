@@ -41,5 +41,6 @@
         </form>
     </div>
     <button type="submit" class="rounded-md w-40 variant-filled h-13" on:click={handleRebalance}>rebalance, remove duplicates</button>
+    <p>see console when u press rebalance to see tree printed!</p>
     
 </div>

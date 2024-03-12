@@ -168,6 +168,21 @@ export default class BST {
     if (!this.root) return
     const sorted = [...new Set(this.inorder()?.sort((a, b) => a - b))]
     this.root = this.buildTree(sorted)
+    this.prettyPrint()
   }
+
+  // imported from top
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+    if (node.left !== null) {
+      this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  };
 
 }
