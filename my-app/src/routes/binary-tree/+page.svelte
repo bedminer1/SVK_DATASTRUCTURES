@@ -18,6 +18,11 @@
         bst.delete(index)
         displayBST = JSON.stringify(bst.levelOrder())
     }
+
+    function handleRebalance() {
+        bst.rebalance()
+        displayBST = JSON.stringify(bst.levelOrder())
+    }
 </script>
 
 <div class="flex flex-col h-[100vh] gap-5 w-full justify-center items-center">
@@ -35,5 +40,6 @@
             <button type="submit" class="rounded-md w-20 variant-filled h-8">delete</button>
         </form>
     </div>
+    <button type="submit" class="rounded-md w-40 variant-filled h-13" on:click={handleRebalance}>rebalance, remove duplicates</button>
     
 </div>

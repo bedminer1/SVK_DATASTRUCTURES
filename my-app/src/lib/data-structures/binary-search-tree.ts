@@ -1,5 +1,3 @@
-import { Root } from "postcss";
-
 class TreeNode {
   value: number;
   left: TreeNode | null;
@@ -131,7 +129,7 @@ export default class BST {
   }
 
   // left root right
-  inorder(node:TreeNode | null = this.root, callback: Function, result: number[] = []) {
+  inorder(node:TreeNode | null = this.root, callback?: Function, result: number[] = []) {
     if (!this.root) return []
     if (!node) return
     this.inorder(node.left, callback, result)
@@ -141,5 +139,35 @@ export default class BST {
     if (result) return result
   }
 
+  // height is distance from leaf to node
+  height(node = this.root): number {
+    if (!node) return -1
+    const leftHeight: number = this.height(node.left)
+    const rightHeight: number = this.height(node.right)
+    return Math.max(leftHeight, rightHeight) + 1
+  }
+
+  // depth is distance from root to node
+  depth(node: TreeNode | null, root = this.root, level: number = 0): number {
+    if (!node) return 0
+    if (!root) return 0
+    if (root.value = node.value) return level
+    let count: number = this.depth(node, root.left, level + 1)
+    if (count) return count
+    return this.depth(node, root.right, level + 1)
+  }
+
+  isBalanced(node = this.root): boolean {
+    if (!node) return true
+    const heightDiff = Math.abs(this.height(node.left) - this.height(node.right))
+
+    return (heightDiff <= 1 && this.isBalanced(node.left) && this.isBalanced(node.right))
+  }
+
+  rebalance() {
+    if (!this.root) return
+    const sorted = [...new Set(this.inorder()?.sort((a, b) => a - b))]
+    this.root = this.buildTree(sorted)
+  }
 
 }
