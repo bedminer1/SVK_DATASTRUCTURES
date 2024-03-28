@@ -17,3 +17,4 @@ Stack used:
  - Sveltekit (barely any 'kit') for frontend
  - Tailwind and SkeletonUI for styling
  - and of course, TypeScript to implement data structuress + scripting frontend
+ㅇ
